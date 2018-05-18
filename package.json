@@ -1,0 +1,37 @@
+{
+  "name": "universal-components-react",
+  "version": "0.0.1",
+  "description": "Components used across all platforms",
+  "main": "dist/index.js",
+  "browser": "dist/index.js",
+  "module": "src/index.js",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "prop-types": "^15.6.1",
+    "react-docgen": "^2.20.1",
+    "react-primitives": "^0.5.1",
+    "styled-components": "^3.2.6"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/preset-react": "^7.0.0-beta.46",
+    "@storybook/addon-actions": "^3.4.3",
+    "@storybook/addon-info": "^3.4.3",
+    "@storybook/addon-links": "^3.4.3",
+    "@storybook/addons": "^3.4.3",
+    "@storybook/react": "^3.4.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "scripts": {
+    "build-storybook": "build-storybook",
+    "build": "babel src -d dist",
+    "prepublish": "yarn build",
+    "storybook": "start-storybook -p 6006"
+  }
+}
