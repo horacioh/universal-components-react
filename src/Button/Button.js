@@ -1,31 +1,38 @@
 import React, { Component } from 'react'
-import { StyleSheet, Touchable, View, Text } from 'react-primitives'
+import PropTypes from 'prop-types'
+import styled, { withTheme } from 'styled-components/primitives'
+import { Touchable } from 'react-primitives'
+import Theme, { defaultTheme } from '../theme'
 
-class Button extends Component {
-  render() {
-    let { children, onPress } = this.props
+const UIButton = styled.View`
+  background-color: ${({ theme, primary }) =>
+    primary ? theme.colors.primary : theme.colors.secondary};
+  padding: ${({ theme }) => theme.gutter.default}px;
+  border-radius: ${({ theme }) => theme.gutter.xsmall}px;
+  margin: ${({ theme }) => theme.gutter.default}px;
+`
 
-    // if children is a function, means the user wants to control whats rendered, so we pass the default.
-    if (typeof children === 'function') {
-      return children({ button: { padding: 8, backgroundColor: '#0f0' } })
-    }
-    return (
-      <Touchable onPress={onPress}>
-        <View style={styles.button}>
-          <Text>{this.props.title}</Text>
-        </View>
-      </Touchable>
-    )
+const Label = styled.Text``
+
+function Button(props) {
+  console.log('props == ', props)
+  let { onPress, children, theme } = props
+  if (typeof children === 'function') {
+    return children({ theme, onPress })
   }
+
+  let isText = typeof children === 'string'
+
+  return (
+    <Touchable onPress={onPress}>
+      <UIButton>{isText ? <Label>{children}</Label> : children}</UIButton>
+    </Touchable>
+  )
 }
 
-export default Button
+Button.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  children: PropTypes.element
+}
 
-const styles = StyleSheet.create({
-  button: {
-    padding: 8,
-    borderRadius: 4,
-    backgroundColor: 'red',
-    color: '#fff'
-  }
-})
+export default withTheme(Button)
